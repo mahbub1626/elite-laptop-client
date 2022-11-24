@@ -8,13 +8,13 @@ module.exports = {
       {
         elitethemes: {
 
-          primary: "#0FCFEC",
+          primary: "#00ABB3",
 
-          secondary: "#19D3AE",
+          secondary: "#3C4048",
 
-          accent: "#3A4256",
+          accent: "#B2B2B2",
 
-          neutral: "#021431",
+          neutral: "#EAEAEA",
 
           "base-100": "#FFFFFF",
         },
