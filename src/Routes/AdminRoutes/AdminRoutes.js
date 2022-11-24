@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AdminRoute = () => {
+const AdminRoutes = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const AdminRoute = () => {
     );
 };
 
-export default AdminRoute;
+export default AdminRoutes;
