@@ -1,19 +1,17 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { createUser, updateUser } = useContext(AuthContext);
-    // const [signUpError, setSignUpError] = useState('');
-    const [createdUserEmail, setCreateUserEmail] = useState('')
 
- 
+
 
     const handleSignUp = (data) => {
-        // console.log(data)
+        console.log(data)
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
@@ -25,13 +23,37 @@ const SignUp = () => {
                 updateUser(userInfo)
                     .then(() => {
                         // navigate('/');
-                        
+                        saveUser(data.name, data.email, data.userType)
                     })
                     .catch(error => console.error(error))
             })
             .catch(error => console.error(error))
     }
 
+    // user data create db
+    const saveUser = (name, email, userType) => {
+        const user = {
+            name,
+            email,
+            userType
+        };
+        console.log(user)
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+
+            })
+    }
+
+
+    
 
     return (
         <div className='h-[800px] flex justify-center items-center'>
@@ -61,12 +83,23 @@ const SignUp = () => {
                         })} className="input input-bordered w-full " />
                         {errors.password && <p className='text-red-500'>{errors.password?.message}</p>}
                     </div>
-                    <input className='btn btn-accent w-full mt-3' value='Sign up' type="submit" />
+                    <div className="flex my-4 items-center">
+                        <label className="label"><span className="label-text ">Buyer</span></label>
+                        <input type="radio"
+                            {...register('userType')}
+                            value='buyer' className="radio mr-4" checked />
+                        <label className="label"><span className="label-text ">Seller</span></label>
+                        <input type="radio"
+                            {...register('userType',)}
+                            value='seller' className="radio " />
+                    </div>
+
+                    <input className='btn btn-primary w-full mt-3 text-white' value='Sign up' type="submit" />
                     {/* {signUpError && <p className='text-red-500'>{signUpError}</p>} */}
                 </form>
                 <p>Already have account? <Link className='text-secondary' to='/login'>Please login</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button className='btn btn-outline hover:btn-secondary w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );
