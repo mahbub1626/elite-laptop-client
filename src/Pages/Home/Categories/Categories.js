@@ -1,8 +1,9 @@
 import React from 'react';
 
 const Categories = () => {
+
     return (
-        <div>
+        <div className='my-12'>
             <div className="card w-96 bg-base-100 shadow-xl">
                 <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
                 <div className="card-body">
