@@ -125,7 +125,7 @@ const AddLaptop = () => {
                                 {
                                     categories?.map(category => <option
                                         key={category._id}
-                                        value={category.categoryId}
+                                        value={category.categoryId}    
                                         
                                     >{category.name}</option>)
                                 }

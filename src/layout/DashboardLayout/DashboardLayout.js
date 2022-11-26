@@ -27,15 +27,18 @@ const DashboardLayout = () => {
                                 <>
                                     <li><Link to='/dashboard/allusers'>Users</Link></li>
                                     <li><Link to='/dashboard/addcategory'>Add Category</Link></li>
+                                    <li><Link to='/dashboard/buyers'>Buyers</Link></li>
+                                    <li><Link to='/dashboard/sellers'>Sellers</Link></li>
+                                    <li><Link to='/dashboard/admin'>Admin</Link></li>
                                     <li><Link to='/dashboard/addlaptop'>Add Laptop</Link></li>
-                                    <li><Link to='/dashboard/managedoctors'>Manage users</Link></li>
+                                    <li><Link to='/dashboard/myproducts'>My Products</Link></li>
                                 </>
                             }
                         </ul>
 
                     </div>
                 </div>
-            <Footer></Footer>
+            {/* <Footer></Footer> */}
         </div>
     );
 };

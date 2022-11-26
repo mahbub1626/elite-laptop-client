@@ -1,20 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
-const AllUsers = () => {
+const Admin = () => {
     const { data: users = [] } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/users');
-            const data = await res.json();
-            console.log(data)
+            const data1 = await res.json();
+            const data = data1.filter(b => b.userType === 'admin')
+            console.log('inside buyers', data)
             return data;
-
         }
     })
     return (
         <div>
-            <h2>This is users {users.length}</h2>
+            <h2 className='text-3xl my-5'>Admin {users?.length}</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">
 
@@ -31,7 +31,7 @@ const AllUsers = () => {
                     <tbody>
 
                         {
-                            users.map((user, i) => <tr
+                            users?.map((user, i) => <tr
                                 key={user._id}
                                 user={user}
                             >
@@ -59,4 +59,4 @@ const AllUsers = () => {
     );
 };
 
-export default AllUsers;
+export default Admin;
