@@ -6,11 +6,13 @@ import Admin from "../../Pages/Dashboard/Admin/Admin";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import Buyers from "../../Pages/Dashboard/Buyers/Buyers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import Sellers from "../../Pages/Dashboard/Sellers/Sellers";
 import Home from "../../Pages/Home/Home/Home";
 import LaptopsCategories from "../../Pages/LaptopsCategories/LaptopsCategories";
 import LogIn from "../../Pages/LogIn/LogIn";
 import SignUp from "../../Pages/LogIn/SignUp";
+import LaptopDetails from '../../Pages/LaptopDetails/LaptopDetails';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,11 @@ const router = createBrowserRouter([
         element: <LaptopsCategories></LaptopsCategories>,
         loader: ({params})=> fetch(`http://localhost:5000/category/${params.id}`)
       },
+      {
+        path: '/laptops/:id',
+        element: <LaptopDetails></LaptopDetails>,
+        loader: ({params})=> fetch(`http://localhost:5000/laptops/${params.id}`)
+      },
 
     ]
   },
@@ -44,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <Dashboard></Dashboard>
+      },
+      {
+        path: '/dashboard/orders',
+        element: <MyOrders></MyOrders>
       },
       {
         path: '/dashboard/allusers',

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const LaptopsCategory = ({laptop}) => {
     const { categoryId, email, img, isVerified, location,
@@ -13,7 +14,9 @@ const LaptopsCategory = ({laptop}) => {
                 <h2 className="card-title">{productName}</h2>
                 <p>If a dog chews shoes whose shoes does he choose?</p>
                 <div className="card-actions">
+                    <Link to={`/laptops/${_id}`}>
                     <button className="btn btn-primary">Buy Now</button>
+                    </Link>
                 </div>
             </div>
         </div>

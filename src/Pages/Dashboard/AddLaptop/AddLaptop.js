@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import Loading from '../../Share/Loading/Loading';
 
 const AddLaptop = () => {
     const { user } = useContext(AuthContext);
@@ -49,7 +50,7 @@ const AddLaptop = () => {
                     console.log(imgData.data.url);
                     const laptop = {
                         img: imgData.data.url,
-                        categoryId: data.categoryId,                        
+                        categoryId: data.categoryId,
                         productName: data.productName,
                         email: data.email,
                         location: data.location,
@@ -60,6 +61,9 @@ const AddLaptop = () => {
                             date: n,
                             time: time
                         },
+                        condition: data.condition,
+                        discription: data.discription,
+                        phone: data.phone,
                         sellerName: data.displayName,
                         isVerified: false
                     }
@@ -77,13 +81,19 @@ const AddLaptop = () => {
                         .then(res => res.json())
                         .then(result => {
                             console.log(result);
-                            toast.success(`${data.name} is added successfully`)
-                            navigate('/dashboard')
+                            if (result.acknowledged) {
+                                toast.success(`${data?.productName} is added successfully`)
+                                navigate('/dashboard')
+                            }
                         })
                 }
 
             })
 
+    }
+
+    if (isLoading) {
+        return <Loading></Loading>
     }
 
     return (
@@ -99,7 +109,7 @@ const AddLaptop = () => {
                                 // required: "Name is required"
                             })}
                                 defaultValue={user?.displayName} readOnly
-                                value={user.displayName}
+                                value={user?.displayName}
                                 className="input input-bordered w-full " />
                             {errors.name && <p className='text-red-500'>{errors.name?.message}</p>}
                         </div>
@@ -109,7 +119,7 @@ const AddLaptop = () => {
                                 // required: "Email is required"
                             })}
                                 defaultValue={user?.email} readOnly
-                                value={user.email}
+                                value={user?.email}
                                 className="input input-bordered w-full " />
                             {errors.email && <p className='text-red-500'>{errors.email?.message}</p>}
                         </div>
@@ -125,13 +135,29 @@ const AddLaptop = () => {
                                 {
                                     categories?.map(category => <option
                                         key={category._id}
-                                        value={category.categoryId}    
-                                        
+                                        value={category.categoryId}
+
                                     >{category.name}</option>)
                                 }
-                                
+
                             </select>
                             {errors.category && <p className='text-red-500'>{errors.category?.message}</p>}
+                        </div>
+
+                        {/* condition type */}
+                        <div className="form-control w-full">
+                            <label className="label"><span className="label-text">Condition Type</span></label>
+                            <select
+                                {...register('condition', {
+                                    required: 'condition is required'
+                                })}
+                                className="select input-bordered w-full">
+                                <option value="good" selected>Good</option>
+                                <option value="excellent">Excellent</option>
+                                <option value="fair">Fair</option>
+
+                            </select>
+                            {errors.condition && <p className='text-red-500'>{errors.condition?.message}</p>}
                         </div>
 
                         <div className="form-control w-full ">
@@ -168,6 +194,20 @@ const AddLaptop = () => {
                                 required: "Original Price is required"
                             })} className="input input-bordered w-full " />
                             {errors.originalPrice && <p className='text-red-500'>{errors.originalPrice?.message}</p>}
+                        </div>
+                        <div className="form-control w-full ">
+                            <label className="label"><span className="label-text">Phone Number</span></label>
+                            <input type="tel" {...register('phone', {
+                                required: "Original Price is required"
+                            })} className="input input-bordered w-full " />
+                            {errors.phone && <p className='text-red-500'>{errors.phone?.message}</p>}
+                        </div>
+                        <div className="form-control w-full ">
+                            <label className="label"><span className="label-text">Discription</span></label>
+                            <textarea {...register('discription', {
+                                required: "Discriptionriginal Price is required"
+                            })} className="textarea textarea-bordered" placeholder="Discription"></textarea>
+                            {errors.discription && <p className='text-red-500'>{errors.discription?.message}</p>}
                         </div>
 
                         {/* img */}

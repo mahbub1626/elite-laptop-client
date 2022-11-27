@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
+import toast from 'react-hot-toast'; 
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import useToken from '../../hooks/useToken';
@@ -15,6 +15,7 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     if (token) {
+        toast.success('User created successfully')
         navigate('/')
     }
 
@@ -24,7 +25,7 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                toast.success('Sign up Successfully!')
+                // toast.success('Sign up Successfully!')
                 const userInfo = {
                     displayName: data.name
                 }
@@ -59,6 +60,7 @@ const SignUp = () => {
             .then(data => {
                 console.log(data)
                 setCreateUserEmail(email)
+
 
             })
     }

@@ -1,17 +1,55 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import ConfirmationModal from '../../Share/ConfirmationModal/ConfirmationModal';
+import Loading from '../../Share/Loading/Loading';
 
 const AllUsers = () => {
-    const { data: users = [] } = useQuery({
+    const [deletingUser, setDeletingUser] = useState(null);
+    const closeModal = () => {
+        setDeletingUser(null)
+    }
+    // console.log('inside seller component', localStorage.getItem('accessToken'))
+    const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users');
-            const data = await res.json();
-            console.log(data)
-            return data;
+            try {
+                const res = await fetch('http://localhost:5000/users', {
+                    headers: {
+                        authorization: `bearer ${localStorage.getItem('accessToken')}`
+                    }
+                });
+                const data = await res.json();
+                console.log(data)
+                return data;
+            }
+            catch (error) {
 
+            }
         }
     })
+
+
+    const handleUserDelete = (user) => {
+        // console.log('Deleting user with id: ', user._id)
+        fetch(`http://localhost:5000/users/${user._id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.deletedCount > 0) {
+                    toast.error(` ${user.name} ${user.userType} deleted successfully.`)
+                    refetch();
+                }
+            })
+
+    }
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+
     return (
         <div>
             <h2>This is users {users.length}</h2>
@@ -47,7 +85,7 @@ const AllUsers = () => {
                                 <td>{user.email}</td>
                                 <td>{user.userType}</td>
                                 <td>
-                                    <button className='btn btn-sm btn-error'>Delete</button>
+                                    <label onClick={() => setDeletingUser(user)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
                                 </td>
                             </tr>)
                         }
@@ -55,6 +93,16 @@ const AllUsers = () => {
                     </tbody>
                 </table>
             </div>
+            {
+                deletingUser && <ConfirmationModal
+                    title={`Are you sure want to delete?`}
+                    message={`If you delete ${deletingUser.name}. It cannot be undo.`}
+                    successAction={handleUserDelete}
+                    modalData={deletingUser}
+                    closeModal={closeModal}
+                    successButtonName="Delete"
+                ></ConfirmationModal>
+            }
         </div>
     );
 };
