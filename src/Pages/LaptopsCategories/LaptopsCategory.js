@@ -2,7 +2,7 @@ import React from 'react';
 import { FaCheckCircle } from "react-icons/fa";
 import { CiShoppingBasket } from "react-icons/ci";
 
-const LaptopsCategory = ({ laptop, setLaptopNameModal }) => {
+const LaptopsCategory = ({ laptop, setProduct }) => {
     const { categoryId, email, img, isVerified, location, phone, condition, originalPrice, postTime, productName, resellPrice, sellerName, yearOfUse, discription, _id } = laptop;
     return (
         <div className="card bg-base-100 shadow-xl">
@@ -38,10 +38,7 @@ const LaptopsCategory = ({ laptop, setLaptopNameModal }) => {
                     <p><strong>Email:</strong> {email}</p>
 
                 </div>
-                <div className="card-actions">
-                    {/* <Link to={`/laptops/${_id}`}>
-                    <button className="btn btn-primary">Buy Now</button>
-                    </Link> */}
+                <div className="card-actions">                    
                     {/* <label
                     // disabled={slots.length === 0}
                     htmlFor="booking-modal" 
@@ -51,8 +48,8 @@ const LaptopsCategory = ({ laptop, setLaptopNameModal }) => {
                     <label
                         htmlFor="purchasing-modal"
                         className="btn btn-primary text-white"
-                        onClick={() => setLaptopNameModal(laptop)}
-                    >open modal</label>
+                        onClick={() => setProduct(laptop)}
+                    >Buy Now</label>
                 </div>
             </div>
 

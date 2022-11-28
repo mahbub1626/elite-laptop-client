@@ -15,11 +15,14 @@ import SignUp from "../../Pages/LogIn/SignUp";
 import LaptopDetails from '../../Pages/LaptopDetails/LaptopDetails';
 import DisplayError from "../../Pages/Share/DisplayError/DisplayError";
 import Blogs from "../../Pages/Blogs/Blogs";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Payment from "../../Pages/Dashboard/Payment/Payment";
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Main></Main>,
+    errorElement: <DisplayError></DisplayError>,
     children: [
       {
         path: '/',
@@ -47,16 +50,14 @@ const router = createBrowserRouter([
         element: <LaptopDetails></LaptopDetails>,
         loader: ({params})=> fetch(`http://localhost:5000/laptops/${params.id}`)
       },
-      {
-        path: '/*',
-        element: <DisplayError></DisplayError>
-      },
+      
 
     ]
   },
   {
     path: '/dashboard',
-    element: <DashboardLayout></DashboardLayout>,
+    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    errorElement: <DisplayError></DisplayError>,
     children: [
       {
         path: '/dashboard',
@@ -86,7 +87,11 @@ const router = createBrowserRouter([
         path: '/dashboard/addlaptop',
         element: <AddLaptop></AddLaptop>
       },
-      
+      {
+        path: '/dashboard/payment/:id',
+        element: <Payment></Payment>,
+        loader: ({ params }) => fetch(`http://localhost:5000/purchases/${params.id}`)
+    },
 
     ]
   }

@@ -5,9 +5,9 @@ import LaptopsCategory from './LaptopsCategory';
 
 const LaptopsCategories = () => {
     const laptops = useLoaderData();
-    const [laptopNameModal, setLaptopNameModal] = useState(null);
-    console.log('inside setLaptopNameModal ', laptopNameModal)
-   
+    const [product, setProduct] = useState(null);
+    console.log('inside setProduct ', product)
+
 
     console.log('Laptops By Categories', laptops)
     return (
@@ -16,9 +16,9 @@ const LaptopsCategories = () => {
             <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-4'>
                 {
                     laptops.map(laptop => <LaptopsCategory
-                    key={laptop._id}
-                    laptop={laptop}
-                    setLaptopNameModal={setLaptopNameModal}
+                        key={laptop._id}
+                        laptop={laptop}
+                        setProduct={setProduct}
                     ></LaptopsCategory>)
                 }
             </div>
@@ -33,9 +33,8 @@ const LaptopsCategories = () => {
                 ></PurchasingModal>
             } */}
             <PurchasingModal
-            // key={laptopNameModal._id}
-            laptopNameModal={laptopNameModal}
-            setLaptopNameModal={setLaptopNameModal}
+                setProduct={setProduct}
+                product={product}
             ></PurchasingModal>
         </div>
     );

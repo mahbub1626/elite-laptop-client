@@ -21,6 +21,7 @@ const MyOrders = () => {
             return data;
         }
     })
+    console.log('inside myOrder 24', purchases)
     if (isLoading) {
         return <Loading></Loading>
     }
@@ -34,10 +35,10 @@ const MyOrders = () => {
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Name</th>
-                            <th>Treatment</th>
-                            <th>Date</th>
-                            <th>Time</th>
+                            <th>Picture</th>
+                            <th>Order ID</th>
+                            <th>Title</th>
+                            <th>Price</th>
                             <th>Payment</th>
                         </tr>
                     </thead>
@@ -45,13 +46,19 @@ const MyOrders = () => {
                         {
                             purchases?.map((purchase, i) => <tr className='mb-5' key={purchase._id}>
                                 <th>{i + 1}</th>
-                                <td>{purchase.patientName}</td>
-                                <td>{purchase.treatment}</td>
-                                <td>{purchase.appointment}</td>
-                                <td>{purchase.slot}</td>
+                                <td>
+                                    <div className="avatar">
+                                        <div className="w-24 rounded">
+                                            <img src={purchase.img} alt='' />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>EL{purchase._id}</td>
+                                <td>{purchase.productName}</td>
+                                <td>${purchase.resellPrice}</td>
                                 <td>
                                     {
-                                        purchase.price && !purchase.paid && <Link
+                                        purchase.resellPrice && !purchase.paid && <Link
                                             to={`/dashboard/payment/${purchase._id}`}
                                         >
                                             <button
@@ -60,7 +67,7 @@ const MyOrders = () => {
                                         </Link>
                                     }
                                     {
-                                        purchase.price && purchase.paid && <span
+                                        purchase.resellPrice && purchase.paid && <span
                                             className='text-green-500'
                                         >Paid</span>
                                     }
