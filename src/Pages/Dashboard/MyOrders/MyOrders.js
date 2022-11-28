@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import Loading from '../../Share/Loading/Loading';
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
@@ -21,7 +22,7 @@ const MyOrders = () => {
         }
     })
     if (isLoading) {
-        // return <Loading></Loading>
+        return <Loading></Loading>
     }
 
     return (

@@ -13,6 +13,8 @@ import LaptopsCategories from "../../Pages/LaptopsCategories/LaptopsCategories";
 import LogIn from "../../Pages/LogIn/LogIn";
 import SignUp from "../../Pages/LogIn/SignUp";
 import LaptopDetails from '../../Pages/LaptopDetails/LaptopDetails';
+import DisplayError from "../../Pages/Share/DisplayError/DisplayError";
+import Blogs from "../../Pages/Blogs/Blogs";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
         element: <SignUp></SignUp>
       },
       {
+        path: '/blogs',
+        element: <Blogs></Blogs>
+      },
+      {
         path: '/category/:id',
         element: <LaptopsCategories></LaptopsCategories>,
         loader: ({params})=> fetch(`http://localhost:5000/category/${params.id}`)
@@ -40,6 +46,10 @@ const router = createBrowserRouter([
         path: '/laptops/:id',
         element: <LaptopDetails></LaptopDetails>,
         loader: ({params})=> fetch(`http://localhost:5000/laptops/${params.id}`)
+      },
+      {
+        path: '/*',
+        element: <DisplayError></DisplayError>
       },
 
     ]

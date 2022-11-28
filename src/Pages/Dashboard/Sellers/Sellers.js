@@ -5,18 +5,6 @@ import ConfirmationModal from '../../Share/ConfirmationModal/ConfirmationModal';
 import Loading from '../../Share/Loading/Loading';
 
 const Sellers = () => {
-    // const { data: users = [] } = useQuery({
-    //     queryKey: ['users'],
-    //     queryFn: async () => {
-    //         const res = await fetch('http://localhost:5000/users');
-    //         const data1 = await res.json();
-    //         const data = data1.filter(b => b.userType === 'seller')
-    //         console.log('inside buyers', data)
-    //         return data;
-    //     }
-    // })
-
-
     const [deletingUser, setDeletingUser] = useState(null);
     const closeModal = () => {
         setDeletingUser(null)
@@ -41,6 +29,25 @@ const Sellers = () => {
             }
         }
     })
+
+    const handleMakeAdmin = id => {
+        console.log(id)
+        fetch(`http://localhost:5000/users/admin/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('ins make admin data: ',data);
+                if (data.modifiedCount > 0) {
+                    toast.success('Admin maked successfully');
+                    refetch();
+                }
+            })
+
+    }
 
 
     const handleUserDelete = (user) => {
@@ -75,6 +82,7 @@ const Sellers = () => {
                             <th>Name</th>
                             <th>Email</th>
                             <th>User Type</th>
+                            <th>Vericication</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -96,6 +104,7 @@ const Sellers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.userType}</td>
+                                <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td>
                                 <td>
                                     <label onClick={() => setDeletingUser(user)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
                                 </td>

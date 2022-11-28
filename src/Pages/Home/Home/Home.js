@@ -1,11 +1,13 @@
 import React from 'react';
-import BannerSection from '../BannerSection/BannerSection';
+import Banner from '../Banner/Banner';
 import Categories from '../Categories/Categories';
+import Advertisements from '../Advertisements/Advertisements';
 
 const Home = () => {
     return (
         <div>
-            <BannerSection></BannerSection>
+            <Banner></Banner>
+            <Advertisements></Advertisements>
             <Categories></Categories>
         </div>
     );
