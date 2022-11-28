@@ -14,7 +14,7 @@ const Sellers = () => {
         queryKey: ['users'],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/users', {
+                const res = await fetch('https://elite-laptop-server.vercel.app/users', {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -32,7 +32,7 @@ const Sellers = () => {
 
     const handleMakeAdmin = id => {
         console.log(id)
-        fetch(`http://localhost:5000/users/admin/${id}`, {
+        fetch(`https://elite-laptop-server.vercel.app/users/admin/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -52,7 +52,7 @@ const Sellers = () => {
 
     const handleUserDelete = (user) => {
         // console.log('Deleting user with id: ', user._id)
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`https://elite-laptop-server.vercel.app/users/${user._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

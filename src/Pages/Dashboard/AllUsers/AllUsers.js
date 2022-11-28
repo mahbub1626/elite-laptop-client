@@ -14,7 +14,7 @@ const AllUsers = () => {
         queryKey: ['users'],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/users', {
+                const res = await fetch('https://elite-laptop-server.vercel.app/users', {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -32,7 +32,7 @@ const AllUsers = () => {
 
     const handleUserDelete = (user) => {
         // console.log('Deleting user with id: ', user._id)
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`https://elite-laptop-server.vercel.app/users/${user._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

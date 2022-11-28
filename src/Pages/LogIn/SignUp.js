@@ -49,7 +49,7 @@ const SignUp = () => {
             userType
         };
         console.log(user)
-        fetch('http://localhost:5000/users', {
+        fetch('https://elite-laptop-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -43,12 +43,12 @@ const router = createBrowserRouter([
       {
         path: '/category/:id',
         element: <LaptopsCategories></LaptopsCategories>,
-        loader: ({params})=> fetch(`http://localhost:5000/category/${params.id}`)
+        loader: ({params})=> fetch(`https://elite-laptop-server.vercel.app/category/${params.id}`)
       },
       {
         path: '/laptops/:id',
         element: <LaptopDetails></LaptopDetails>,
-        loader: ({params})=> fetch(`http://localhost:5000/laptops/${params.id}`)
+        loader: ({params})=> fetch(`https://elite-laptop-server.vercel.app/laptops/${params.id}`)
       },
       
 
@@ -90,7 +90,7 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/payment/:id',
         element: <Payment></Payment>,
-        loader: ({ params }) => fetch(`http://localhost:5000/purchases/${params.id}`)
+        loader: ({ params }) => fetch(`https://elite-laptop-server.vercel.app/purchases/${params.id}`)
     },
 
     ]

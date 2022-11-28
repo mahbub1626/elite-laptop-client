@@ -5,7 +5,7 @@ const Admin = () => {
     const { data: users = [] } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users');
+            const res = await fetch('https://elite-laptop-server.vercel.app/users');
             const data1 = await res.json();
             const data = data1.filter(b => b.userType === 'admin')
             console.log('inside buyers', data)

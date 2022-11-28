@@ -42,7 +42,7 @@ const LaptopDetails = () => {
             }
         }
         // save purcheses data in the database
-        fetch('http://localhost:5000/purchases', {
+        fetch('https://elite-laptop-server.vercel.app/purchases', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

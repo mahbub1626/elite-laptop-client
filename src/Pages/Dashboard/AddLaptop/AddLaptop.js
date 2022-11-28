@@ -24,7 +24,7 @@ const AddLaptop = () => {
     const { data: categories, isLoading } = useQuery({
         queryKey: ['category'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/categories');
+            const res = await fetch('https://elite-laptop-server.vercel.app/categories');
             const data = await res.json();
             return data;
         }
@@ -70,7 +70,7 @@ const AddLaptop = () => {
                     console.log(laptop)
 
                     //  save laptop data in the database
-                    fetch('http://localhost:5000/laptops', {
+                    fetch('https://elite-laptop-server.vercel.app/laptops', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
