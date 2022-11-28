@@ -31,9 +31,9 @@ const Blogs = () => {
     ]
 
     return (
-        <div className='my-24 lg:w-1/2 mx-auto px-4'>
+        <div className='my-20 lg:w-1/2 mx-auto px-4'>
             <div className='container'>
-                <h3 className='text-3xl text-center my-4 font-bold'>Questions And Answers</h3>
+                <h3 className='text-3xl text-center mb-8 font-bold'>Questions And Answers</h3>
                 <section className='info text-xl'>
                     {questions.map((question) => (
                         <Blog key={question.id} {...question} />
