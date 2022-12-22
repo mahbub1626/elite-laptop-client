@@ -12,11 +12,13 @@ const Navbar = () => {
     }
     const menuItems = <>
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/dashboard'>Dashboard</Link></li>
         <li><Link to='/blogs'>Blogs</Link></li>
         {
             user?.uid ?
-                <li><button onClick={handleSingOut}>Sign out</button></li>
+                <>
+                    <li><Link to='/dashboard'>Dashboard</Link></li>
+                    <li><button onClick={handleSingOut}>Sign out</button></li>
+                </>
                 :
                 <>
                     <li><Link to='/login'>Login</Link></li>
@@ -39,7 +41,7 @@ const Navbar = () => {
                 </div>
                 <a href='/' className="btn btn-ghost normal-case text-xl text-white">
                     <img src={Logo} alt="Elite Laptop" />
-                    </a>
+                </a>
             </div>
             <div className="navbar-center hidden lg:flex text-white">
                 <ul className="menu menu-horizontal p-0">

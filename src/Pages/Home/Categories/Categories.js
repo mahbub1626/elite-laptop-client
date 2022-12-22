@@ -17,7 +17,7 @@ const Categories = () => {
 
     return (
         <div className='my-12'>
-            <h2 className='text-3xl font-bold'> LATEST LAPTOPS COLLECTION{categories.length}</h2>
+            <h2 className='text-3xl font-bold'> LATEST LAPTOPS COLLECTIONS</h2>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-4'>
             {
                 categories.map(category => <Category
